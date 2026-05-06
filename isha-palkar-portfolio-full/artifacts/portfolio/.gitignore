@@ -1,0 +1,14 @@
+node_modules/
+dist/
+build/
+.env
+.env.local
+.env.*.local
+frontend/node_modules/
+frontend/dist/
+backend/node_modules/
+backend/dist/
+.DS_Store
+Thumbs.db
+.vite/
+.vercel/
