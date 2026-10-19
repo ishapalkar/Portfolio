@@ -32,20 +32,25 @@ export function WashiTape({ color = "hsl(40 80% 78% / 0.65)", width = 56, rotati
 }
 
 interface StickyNoteProps {
-  text: string;
+  text?: string;
+  children?: React.ReactNode;
   color?: string;
+  tone?: string;
   rotation?: number;
+  rotate?: number;
   className?: string;
 }
 
-export function StickyNote({ text, color = "#FFF9C4", rotation = -2, className = "" }: StickyNoteProps) {
+export function StickyNote({ text, children, color, tone, rotation, rotate, className = "" }: StickyNoteProps) {
+  const bg = tone ?? color ?? "#FFF9C4";
+  const deg = rotate ?? rotation ?? -2;
   return (
     <motion.div
       whileHover={{ rotate: 0, scale: 1.05, y: -4 }}
       className={`inline-block px-4 py-3 rounded-sm shadow-md ${className}`}
       style={{
-        background: color,
-        transform: `rotate(${rotation}deg)`,
+        background: bg,
+        transform: `rotate(${deg}deg)`,
         fontFamily: "'Caveat', cursive",
         fontSize: "0.95rem",
         color: "hsl(16 41% 20%)",
@@ -54,7 +59,7 @@ export function StickyNote({ text, color = "#FFF9C4", rotation = -2, className =
         userSelect: "none",
       }}
     >
-      {text}
+      {children ?? text}
     </motion.div>
   );
 }

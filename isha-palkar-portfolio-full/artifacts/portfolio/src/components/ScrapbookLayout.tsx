@@ -109,17 +109,24 @@ type ScrapbookImageFrameProps = PropsWithChildren<HTMLMotionProps<"div">> & {
   src: string;
   alt: string;
   rotate?: number;
+  rotation?: number;
+  width?: number | string;
+  height?: number | string;
 };
 
-export function ScrapbookImageFrame({ className, src, alt, rotate = 0, ...props }: ScrapbookImageFrameProps) {
+export function ScrapbookImageFrame({ className, src, alt, rotate, rotation, width, height, style, ...props }: ScrapbookImageFrameProps) {
+  const deg = rotate ?? rotation ?? 0;
   return (
     <motion.div
       {...props}
-      whileHover={{ y: -4, rotate: rotate > 0 ? rotate + 1 : rotate - 1 }}
+      whileHover={{ y: -4, rotate: deg > 0 ? deg + 1 : deg - 1 }}
       className={cn("paper-edge relative overflow-hidden rounded-sm", className)}
       style={{
-        transform: `rotate(${rotate}deg)`,
+        width,
+        height,
+        transform: `rotate(${deg}deg)`,
         boxShadow: "5px 6px 0 rgba(0,0,0,0.08), 0 24px 50px rgba(0,0,0,0.06)",
+        ...style,
       }}
     >
       <TapeElement className="-top-3 left-6" rotate={-6} />
